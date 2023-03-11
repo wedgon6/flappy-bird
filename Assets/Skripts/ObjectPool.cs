@@ -33,13 +33,12 @@ public class ObjectPool : MonoBehaviour
 
     protected void DisableObjectAbroadScreen()
     {
-        Vector3 disablePoint = _camera.ViewportToWorldPoint(new Vector2(0,0.5f));
-
         foreach (var item in _pool)
         {
             if(item.activeSelf == true)
             {
-                if(item.transform.position.x < disablePoint.x)
+                Vector3 point = _camera.WorldToViewportPoint(item.transform.position);
+                if(point.x < -1)
                 {
                     item.SetActive(false);
                 }
